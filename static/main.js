@@ -1,0 +1,5 @@
+function togglePassword(){const input=document.getElementById('password'); if(input){input.type=input.type==='password'?'text':'password'}}
+document.querySelectorAll('.role-pill').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.role-pill').forEach(b=>b.classList.remove('selected')); button.classList.add('selected'); const email=document.querySelector('[name=email]'); if(email)email.value=button.dataset.email;}));
+const search=document.getElementById('tableSearch');if(search){search.addEventListener('input',()=>{const q=search.value.toLowerCase();document.querySelectorAll('#appTable tbody tr').forEach(row=>row.style.display=row.textContent.toLowerCase().includes(q)?'':'none')})}
+
+const typeSelect=document.querySelector('select[name=document_type]'); if(typeSelect){const update=()=>{const pick=document.getElementById('orderPick'); const sel=document.getElementById('order_id');const isOrder=typeSelect.value==='order'; if(pick)pick.style.display=isOrder?'block':'none';if(sel)sel.required=isOrder};typeSelect.addEventListener('change',update);update()}

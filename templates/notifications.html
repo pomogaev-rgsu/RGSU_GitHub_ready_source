@@ -1,0 +1,3 @@
+{% extends 'base.html' %}{% block title %}Уведомления{% endblock %}{% block breadcrumb %}Уведомления{% endblock %}{% block content %}
+<div class="heading-row"><div><div class="overline">ЦЕНТР УВЕДОМЛЕНИЙ</div><h1 class="page-title">Уведомления <span class="light-asterisk">✳</span></h1><p class="page-description">Изменения статусов и служебные сообщения</p></div></div><div class="panel notification-panel">{% for n in notifications %}<a class="notification-entry" href="/applications/{{n.application_id}}"><span class="notice-icon">✳</span><div><b>{{n.title}}</b><p>{{n.message}}</p><small>{{n.at.strftime('%d.%m.%Y · %H:%M')}}</small></div><span class="table-arrow">↗</span></a>{% else %}<div class="empty-state">Уведомлений пока нет</div>{% endfor %}</div>
+{% endblock %}

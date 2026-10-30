@@ -1,0 +1,23 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102649"><title>{% block title %}Сервис справок{% endblock %} · РГСУ</title><link rel="stylesheet" href="/static/style.css"></head><body>
+{% if user %}
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-icon">Р</div><div><div class="brand-name">РГСУ<span class="brand-dot">.</span></div><div class="brand-caption">Цифровые сервисы</div></div></div>
+    <div class="nav-heading">РАБОЧЕЕ ПРОСТРАНСТВО</div>
+    <nav class="nav-links">
+      <a class="nav-link {% if request.url.path=='/dashboard' %}active{% endif %}" href="/dashboard"><span class="nav-ico">▦</span>Обзор</a>
+      <a class="nav-link {% if request.url.path=='/applications' %}active{% endif %}" href="/applications"><span class="nav-ico">▤</span>{% if user.role=='student' %}Мои заявки{% else %}Все обращения{% endif %}</a>
+      {% if user.role=='student' %}<a class="nav-link {% if request.url.path=='/applications/new' %}active{% endif %}" href="/applications/new"><span class="nav-ico">⊕</span>Новая заявка</a>{% endif %}
+      <a class="nav-link {% if request.url.path=='/notifications' %}active{% endif %}" href="/notifications"><span class="nav-ico">♧</span>Уведомления</a>
+      {% if user.role=='admin' %}<a class="nav-link {% if request.url.path=='/admin' %}active{% endif %}" href="/admin"><span class="nav-ico">⚙</span>Администрирование</a>{% endif %}
+    </nav>
+    <div class="side-bottom"><div class="helper"><span class="helper-spark">✦</span><b>Учебный прототип</b><small>Демонстрационная версия. Данные вымышлены.</small></div><div class="side-user"><div class="user-avatar">{{ user.full_name[0] }}</div><div class="side-user-text"><b>{{ user.full_name }}</b><small>{{ roles[user.role] }}</small></div></div><form action="/logout" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="exit-link" type="submit">↪ <span>Выйти из аккаунта</span></button></form></div>
+  </aside>
+  <main class="main-area">
+    <header class="topbar"><div class="breadcrumb">Главная <span>/</span> {% block breadcrumb %}Обзор{% endblock %}</div><div class="top-right"><span class="environment"><span class="env-dot"></span> DEMO</span><span class="today">{{ now.strftime('%d.%m.%Y') }}</span><div class="header-avatar">{{ user.full_name[0] }}</div></div></header>
+    <div class="content-area">{% block content %}{% endblock %}<footer class="page-footer">РГСУ · Сервис электронных справок <span>Учебный проект. Без интеграции с РГСУ.</span></footer></div>
+  </main>
+</div>
+{% else %}{% block guest %}{% endblock %}{% endif %}
+<script src="/static/main.js"></script>
+</body></html>
